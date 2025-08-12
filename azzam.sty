@@ -230,10 +230,10 @@
 
 	%%fakesection Set up author and date
     \ifazzamauthor
-		\author{Azzam Labib Hakim \hspace{0.5cm} \textbar \hspace{0.5cm} Instagram: @haxuv\_world \hspace{0.5cm} \textbar \hspace{0.5cm} Threads: @azzam\_29\_12}
+		\author{\scriptsize Azzam Labib Hakim \textbar Instagram: @haxuv\_world \textbar Threads: @azzam\_29\_12}
 	\fi
 	\ifazzamstargen
-		\author{Star Generation +62 817 769 318 \textbar Instagram: @stargeneration\_id | Azzam L. H. (IG: @azzam\_29\_12)}
+		\author{\scriptsize Star Generation +62 817 769 318 \textbar Instagram: @stargeneration\_id \textbar\textbar Azzam L. H. (IG: @azzam\_29\_12)}
 	\fi
 	
 	%%fakesection Hyperref Customization
@@ -434,14 +434,14 @@
 	\providecommand{\thedate}{\@date}
 	
 	%%fakesection Page Layout
-        %%space
+    %%space
 	\renewcommand{\baselinestretch}{1.5}
 	\setlength{\parindent}{0pt}
 	
 	\ifazzamfancy
     	\@ifundefined{KOMAClassName}
 		{
-                %%Page margin settings
+            %%Page margin settings
 			\usepackage{fancyhdr}
 			\setlength{\headheight}{0.75in}
 			\setlength{\oddsidemargin}{0in}
@@ -451,12 +451,6 @@
 			\setlength{\textwidth}{6.5in}
 			\setlength{\headwidth}{6.5in}
 			\setlength{\textheight}{8.75in}
-            
-                \addtolength{\oddsidemargin}{-0.4in}
-			\addtolength{\evensidemargin}{-0.4in}
-			\addtolength{\textwidth}{0.8in}
-			\addtolength{\textheight}{1.5cm}
-            
 			\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 			\setlength{\footskip}{0.3in}
 			\ifazzamhdr
@@ -474,40 +468,29 @@
 		{
 			\usepackage[headsepline]{scrlayer-scrpage}
 			\renewcommand{\headfont}{}
-			\addtolength{\textheight}{3.14cm}
-			\setlength{\footskip}{0.5in}
-			\setlength{\headsep}{10pt}
-                \automark{section}
-                % center header
+			\addtolength{\textheight}{1.55in}
+			% to make it still centered, oddsidemargin + evensidemargin = textwidth
+			\addtolength{\oddsidemargin}{-0.7in}
+			\addtolength{\evensidemargin}{-0.7in}
+			\addtolength{\textwidth}{1.4in}
+			\addtolength{\footskip}{-0.65in}
+			\addtolength{\headsep}{-0.1in}
+			\addtolength{\voffset}{0in}
+
+			\automark{section}
+			% center header
 			\chead{}
-                 % left header
-			\ihead{\footnotesize\textbf{\thetitle}\\
-                        \footnotesize\theauthor}
-                % right header
-			\ohead{\thedate}
-                % center header
-			\cfoot{Page \pagemark}
-                % left footer
-                \ifoot{}
-                % right footer
-                \ofoot{}
-                
-            \ifazzamstargen
-                    
-                % center header
-			\chead{}
-                 % left header
-			\ihead{\footnotesize\textbf{\thetitle}\\
-                        \footnotesize \theauthor }
-                % right header
-			\ohead{}
-                % center header
-			\cfoot{Page \pagemark}
-                % left footer
-                \ifoot{}
-                % right footer
-                \ofoot{\thedate}
-                \fi
+			% left header
+			\ihead{\textbf{\thetitle}\\
+					\theauthor}
+			% right header
+			\ohead{\scriptsize \thedate\\}
+			% center header
+			\cfoot{\pagemark}
+			% left footer
+			\ifoot{}
+			% right footer
+			\ofoot{}
 		}
 	\fi
 
