@@ -162,11 +162,11 @@
 	\fi
 
 	%%fakesection Set up author and date
+    \ifazzamauthor
+		\author{Azzam Labib Hakim \hspace{0.5cm} \textbar \hspace{0.5cm} Instagram: @haxuv\_world \hspace{0.5cm} \textbar \hspace{0.5cm} Threads: @azzam\_29\_12}
+	\fi
 	\ifazzamstargen
 		\author{Star Generation +62 817 769 318 \textbar Instagram: @stargeneration\_id | Azzam L. H. (IG: @azzam\_29\_12)}
-	\fi
-        \ifazzamauthor
-		\author{Azzam Labib Hakim \hspace{0.5cm} \textbar \hspace{0.5cm} Instagram: @haxuv\_world \hspace{0.5cm} \textbar \hspace{0.5cm} Threads: @azzam\_29\_12}
 	\fi
 	
 	%%fakesection Hyperref Customization
@@ -220,12 +220,12 @@
 			bottomline=false, linecolor=Blue!50, backgroundcolor=Blue!5}
 		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small,
 			spaceabove=0pt, spacebelow=0pt, mdframed={style=mdremarkbox}]{remarksolbox}
-		\declaretheoremstyle[spaceabove=8pt, spacebelow=16pt]{SoalStandarIndonesia}
-		\declaretheoremstyle[spaceabove=8pt, spacebelow=20pt]{SoalJawabIndonesia}
+		\declaretheoremstyle[spaceabove=8pt, spacebelow=16pt]{SoalStandar}
+		\declaretheoremstyle[spaceabove=8pt, spacebelow=20pt]{SoalJawab}
 		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small, spaceabove=3pt,
-			spacebelow=1pt, mdframed={style=mdsolbox}]{JawabanStandarIndonesia}
+			spacebelow=1pt, mdframed={style=mdsolbox}]{JawabanStandar}
 		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small, spaceabove=1pt,
-			spacebelow=12pt, mdframed={style=mdblackbox}]{SolusiStandarIndonesia}
+			spacebelow=12pt, mdframed={style=mdblackbox}]{SolusiStandar}
 		\newcommand{\listhack}{$\empty$\vspace{-2em}}
 	\fi
 
@@ -265,10 +265,10 @@
 		\declaretheorem[name=Fact,sibling=theorem]{fact}
 		\declaretheorem[name=Problem,sibling=theorem]{problem}
 		\declaretheorem[name=Question,sibling=theorem]{ques}
-		\declaretheorem[name=Soal,style=SoalStandarIndonesia,numbered=yes]{soalindonesia}
-		\declaretheorem[name=Soal,style=SoalJawabIndonesia,numbered=yes]{soaljawabindonesia}
-		\declaretheorem[name=Jawaban,style=JawabanStandarIndonesia,numbered=no]{jawabanindonesia}
-		\declaretheorem[name=Solusi,style=SolusiStandarIndonesia,numbered=no]{solusiindonesia}
+		\declaretheorem[name=Soal,style=SoalStandar,numbered=yes]{soal}
+		\declaretheorem[name=Soal,style=SoalJawab,numbered=yes]{soaljawab}
+		\declaretheorem[name=Jawaban,style=JawabanStandar,numbered=no]{jawaban}
+		\declaretheorem[name=Solusi,style=SolusiStandar,numbered=no]{solusi}
 		\Crefname{claim}{Claim}{Claims}
 		\Crefname{conjecture}{Conjecture}{Conjectures}
 		\Crefname{exercise}{Exercise}{Exercises}
