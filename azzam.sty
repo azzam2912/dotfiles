@@ -151,6 +151,7 @@
 		\usepackage{pgfplots}
 		\pgfplotsset{compat=1.15}
 		\usepackage{mathrsfs}
+		\usepackage{tkz-euclide}
 		\usetikzlibrary{arrows}
 		\usepackage[shortlabels]{enumitem}
 		\usepackage{microtype}
@@ -396,11 +397,18 @@
 		}
 	\fi
 
-        %fakesection StarGen Watermark
-        \ifazzamstargen
-            % set background
-            \usepackage{background}
-		\backgroundsetup{contents=\includegraphics{stargen.png}, angle=0, scale=1.1, opacity=0.10}
+	%%fakesection StarGen Watermark
+	\ifazzamstargen
+		% First, check if the image file exists before trying to use it
+		\IfFileExists{stargen.png}{%
+			% If stargen.png exists, load the package and set the background
+			\usepackage{background}
+			\backgroundsetup{contents=\includegraphics{stargen.png}, angle=0, scale=1.1, opacity=0.10}
+		}{%
+			% If stargen.png does NOT exist, print a warning to the log file
+			% and continue compiling without an error.
+			\PackageWarning{azzam}{'stargen.png' not found. Watermark will not be displayed.}
+		}
 	\fi
 %%fakesection END MAIN SETUP
 \fi
