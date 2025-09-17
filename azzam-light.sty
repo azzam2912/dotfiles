@@ -37,6 +37,7 @@
 \ProvidesPackage{azzam-light}
 %%fakesection Argument processing
 \newif\ifazzamstargen\azzamstargenfalse
+\newif\ifazzamstargensimulation\azzamstargensimulationfalse
 \newif\ifazzamfancy\azzamfancytrue
 \newif\ifazzamsetup\azzamsetuptrue
 \newif\ifazzampkg\azzampkgtrue
@@ -44,6 +45,7 @@
 
 % Receive Arguments
 \DeclareOption{stargen}{\azzamstargentrue}
+\DeclareOption{stargen-simulation}{\azzamstargentrue \azzamstargensimulationtrue}
 \DeclareOption{nostargen}{\azzamstargenfalse}
 \DeclareOption{fancy}{\azzamfancytrue}
 \DeclareOption{nofancy}{\azzamfancyfalse}
@@ -55,7 +57,7 @@
 
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
-
+\newcommand{\dg}{^\circ}
 %%fakesection BEGIN MAIN SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifazzamsetup
@@ -77,7 +79,16 @@
 		\usepackage[shortlabels]{enumitem}
 		\usepackage{microtype}
 		\usepackage[obeyFinal,textsize=scriptsize,shadow]{todonotes}
-		\usepackage[nameinlink]{cleveref}
+            \usepackage[colorlinks=true]{hyperref}
+            \usepackage[nameinlink]{cleveref}
+            \hypersetup{
+			linkcolor=blue,
+			filecolor=magenta,
+			urlcolor=cyan,
+			citecolor=ForestGreen,
+			pdfpagemode=FullScreen
+		}
+        \usepackage{tasks}
 	\fi
 
 	%%fakesection Set up author and date
@@ -150,7 +161,10 @@
 			\PackageWarning{azzam-light}{'stargen-blue.png' not found. Header image will not be displayed.}
 		}
 		% Header Page Number
-		\fancyhead[R]{\textbf{ \thetitle } - Page \thepage}
+        \fancyhead[R]{\textbf{ \thetitle } - Page \thepage}
+        \ifazzamstargensimulation
+            \fancyhead[R]{Page \thepage}
+        \fi
 		
 		% Copyright page at end of document
 		\AtEndDocument{
