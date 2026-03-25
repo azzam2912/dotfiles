@@ -78,6 +78,7 @@
 		\usetikzlibrary{arrows}
 		\usepackage[shortlabels]{enumitem}
 		\usepackage{microtype}
+        \usepackage{lastpage}
 		\usepackage[obeyFinal,textsize=scriptsize,shadow]{todonotes}
             \usepackage[colorlinks=true]{hyperref}
             \usepackage[nameinlink]{cleveref}
@@ -119,7 +120,7 @@
 		\setlength{\headsep}{20pt}
 		\setlength{\textwidth}{7in}
 		\setlength{\headwidth}{7in}
-		\setlength{\textheight}{8.82in}
+		\setlength{\textheight}{8.9in}
 		\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 		\setlength{\footskip}{38pt}
 		
@@ -167,7 +168,7 @@
 			\PackageWarning{azzam-light}{'stargen-blue.png' not found. Header image will not be displayed.}
 		}
 		% Header Page Number
-        \fancyhead[R]{\textbf{ \thetitle } - Page \thepage}
+        \fancyhead[R]{\textbf{ \thetitle } - Page \thepage \text{ of \pageref{LastPage}}}
         \ifazzamstargensimulation
             \fancyhead[R]{Page \thepage}
         \fi
