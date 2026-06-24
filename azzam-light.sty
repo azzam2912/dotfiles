@@ -113,27 +113,20 @@
 		\usepackage{fancyhdr}
 		
 		% --- Page Geometry ---
-		\setlength{\headheight}{0pt}
-		\setlength{\oddsidemargin}{0in}
-		\setlength{\evensidemargin}{0in}
-		\setlength{\voffset}{-1.0in}
-		\setlength{\headsep}{20pt}
-		\setlength{\textwidth}{7in}
-		\setlength{\headwidth}{7in}
-		\setlength{\textheight}{8.9in}
-		\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
-		\setlength{\footskip}{38pt}
-		
-		% --- Geometry Adjustments ---
-		\addtolength{\oddsidemargin}{-0.45in}
-		\addtolength{\evensidemargin}{-0.45in}
-		\addtolength{\voffset}{0.80in}
+		\geometry{
+			margin=1cm,
+			includeheadfoot,
+			headheight=15pt
+		}
 		
 		% --- Activate and Configure fancyhdr ---
 		\pagestyle{fancy}
 		\fancyhf{} % Clear all header and footer fields
 		\renewcommand{\headrulewidth}{0.5pt}
 		\renewcommand{\footrulewidth}{0pt}
+		
+		% --- Default Page Numbering ---
+		\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
 	\fi
 	
 	%%fakesection StarGen Watermark and Header/Footer
@@ -170,7 +163,7 @@
 		% Header Page Number
         \fancyhead[R]{\textbf{ \thetitle } - Page \thepage \text{ of \pageref{LastPage}}}
         \ifazzamstargensimulation
-            \fancyhead[R]{Page \thepage}
+            \fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
         \fi
 		
 		% Copyright page at end of document
@@ -189,4 +182,3 @@
 		}
 	\fi
 %%fakesection END MAIN SETUP
-\fi
