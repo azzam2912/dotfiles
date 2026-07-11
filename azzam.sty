@@ -449,7 +449,15 @@
 	
 	\ifazzamfancy
 		\usepackage{geometry}
+		% Bind the layout to the *actual* paper dimensions set by the document
+		% class so the 1cm margins (and the header/footer positions) stay
+		% correct for any paper size (a4paper, legalpaper, letterpaper, ...).
+		% Without this, geometry can keep computing the layout for a default
+		% paper size, leaving e.g. the footer floating far above the bottom edge
+		% on taller paper such as legalpaper.
 		\geometry{
+			paperwidth=\paperwidth,
+			paperheight=\paperheight,
 			margin=1cm,
 			includeheadfoot,
 			headheight=20pt
@@ -461,12 +469,21 @@
             %%Page margin settings
 			\usepackage{fancyhdr}
 			\ifazzamhdr
+				% The two-line title/author header needs more vertical room than
+				% the default 20pt; enlarge the head only for standard classes so
+				% the KOMA branch below keeps its own (working) head layout.
+				\geometry{headheight=40pt}
 				\renewcommand{\headrulewidth}{0.5pt}
 				\renewcommand{\footrulewidth}{0.0pt}
 				\pagestyle{fancy}
-				\lhead{\small Azzam Labib Hakim \textbar Instagram: @haxuv\_world \textbar Threads: @azzam\_29\_12}
+				% Mimic the scrartcl (scrlayer-scrpage) header/footer layout:
+				%   left header  -> bold title + author
+				%   right header -> date
+				%   center foot  -> page number
+				\lhead{\textbf{\thetitle}\\
+						\theauthor}
 				\chead{}
-				\rhead{}
+				\rhead{\small \thedate\\}
 				\lfoot{}
 				\cfoot{Page \thepage\ of \pageref{LastPage}}
 				\rfoot{}
