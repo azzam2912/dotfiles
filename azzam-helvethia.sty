@@ -1,0 +1,591 @@
+% azzam-helvethia.sty
+% Helvethia theme variant of azzam.sty.
+%
+% Color palette
+%   bg          #F2EEE5  warm parchment page background
+%   surface     #FFFDF8  cards / theorem panels
+%   surface-alt #F2EEE5  sidebars / section bands (same as bg)
+%   ink         #1A1C24  primary text
+%   ink-soft    #3A3D49  secondary text
+%   crimson     #A8324A  primary brand
+%   crimson-ink #7A1F33  hover / press
+%
+% Font: Helvetica-clone (helvet) for body text; Palatino-style math via newpxmath.
+%
+% Derived from azzam.sty (Copyright 2025 Azzam, Boost Software License 1.0).
+
+\ProvidesPackage{azzam-helvethia}
+%%fakesection Argument processing
+\newif\ifazzamstargen\azzamstargenfalse
+\newif\ifazzamfancy\azzamfancytrue
+\newif\ifazzamhdr\azzamhdrtrue
+\newif\ifazzamhref\azzamhreftrue
+\newif\ifazzamsetup\azzamsetuptrue
+\newif\ifazzamthm\azzamthmtrue
+\newif\ifazzamsecthm\azzamsecthmfalse
+\newif\ifazzampkg\azzampkgtrue
+\newif\ifazzamauthor\azzamauthortrue
+\newif\ifazzammdthm\azzammdthmfalse
+\newif\ifazzamcolorsec\azzamcolorsecfalse
+\newif\ifazzampatchasy\azzampatchasyfalse
+\newif\ifazzamhints\azzamhintsfalse
+\newif\ifazzamasy\azzamasytrue
+% gradient background flags
+\newif\ifazzamgradient\azzamgradientfalse
+\newif\ifazzamgradienttwo\azzamgradienttwofalse
+\newif\ifazzamgradientactive\azzamgradientactivefalse
+
+% Receive Arguments
+\DeclareOption{wota}{\azzamsecthmtrue\azzammdthmtrue\azzamcolorsectrue}
+\DeclareOption{hagavi}{\azzamsecthmtrue\azzammdthmtrue\azzamcolorsectrue}
+\DeclareOption{stargen}{\azzamstargentrue\azzamsecthmtrue\azzammdthmtrue\azzamcolorsectrue}
+\DeclareOption{nostargen}{\azzamstargenfalse}
+\DeclareOption{fancy}{\azzamfancytrue}
+\DeclareOption{nofancy}{\azzamfancyfalse}
+\DeclareOption{hdr}{\azzamhdrtrue}
+\DeclareOption{nohdr}{\azzamhdrfalse}
+\DeclareOption{href}{\azzamhreftrue}
+\DeclareOption{nohref}{\azzamhreffalse}
+\DeclareOption{nosetup}{\azzamsetupfalse}
+\DeclareOption{thm}{\azzamthmtrue}
+\DeclareOption{nothm}{\azzamthmfalse}
+\DeclareOption{secthm}{\azzamsecthmtrue}
+\DeclareOption{nosecthm}{\azzamsecthmfalse}
+\DeclareOption{nopkg}{\azzampkgfalse}
+\DeclareOption{noauthor}{\azzamauthorfalse}
+\DeclareOption{mdthm}{\azzammdthmtrue}
+\DeclareOption{nomdthm}{\azzammdthmfalse}
+\DeclareOption{colorsec}{\azzamcolorsectrue}
+\DeclareOption{nocolorsec}{\azzamcolorsecfalse}
+\DeclareOption{patchasy}{\azzampatchasytrue}
+\DeclareOption{noasy}{\azzamasyfalse}
+\DeclareOption{hints}{\azzamhintstrue}
+% gradient: subtle two-point radial gradient (crimson top-left + dark bottom-right)
+% gradient2: richer three-point gradient (crimson + dark + gold center)
+\DeclareOption{gradient}{\azzamgradienttrue}
+\DeclareOption{gradient2}{\azzamgradienttrue\azzamgradienttwotrue}
+\DeclareOption{nogradient}{\azzamgradientfalse\azzamgradienttwofalse}
+
+\ProcessOptions\relax
+
+\ifazzampkg\else\azzammdthmfalse\fi
+\ifazzampkg\else\azzamasyfalse\fi
+\ifazzamsetup\else\azzamthmfalse\fi
+
+%%fakesection Some macros
+\ifazzampkg
+	\usepackage{amsmath,amssymb}
+\fi
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vocab}[1]{\textbf{\color{crimson} #1}}
+\providecommand{\alert}{\vocab}
+% ── Crimson color shortcuts ───────────────────────────────────────────────
+% \textcrimson{text}    — brand crimson (#A8324A)
+% \textcrimsonink{text} — darker crimson-ink (#7A1F33), for emphasis / titles
+\newcommand{\textcrimson}[1]{{\color{crimson}#1}}
+\newcommand{\textcrimsonink}[1]{{\color{crimsonink}#1}}
+\providecommand{\half}{\frac{1}{2}}
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator*{\lcm}{lcm}
+\DeclareMathOperator*{\argmin}{arg min}
+\DeclareMathOperator*{\argmax}{arg max}
+\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{subproof}[1][Proof]{\begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}}{\end{proof}}
+\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup}
+\newenvironment{bukti}{\begin{proof}[Bukti]}{\end{proof}}
+\newenvironment{buktilemma}{\begin{proof}[Bukti Lemma]}{\end{proof}}
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+\newcommand{\dangle}{\measuredangle}
+\newcommand{\tarc}{\mbox{\large$\frown$}}
+\newcommand{\arc}[1]{\stackrel{\tarc}{#1}}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\QQp}{{\mathbb Q}^+}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\RRp}{{\mathbb R}^+}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\ZZp}{{\mathbb Z}^+}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\img}{im}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Hom}{Hom}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\eval}[1]{\left. #1 \right|}
+\newcommand{\inv}{^{-1}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\dg}{^\circ}
+
+%%fakesection Asymptote setup
+\ifazzamasy
+	\ifazzampatchasy
+		\usepackage{patch-asy}
+	\else
+		\usepackage{asymptote}
+	\fi
+	\begin{asydef}
+		defaultpen(fontsize(10pt));
+		size(8cm);
+		usepackage("amsmath");
+		usepackage("amssymb");
+		settings.tex="pdflatex";
+		settings.outformat="pdf";
+		import geometry;
+		void filldraw(picture pic = currentpicture, conic g, pen fillpen=defaultpen, pen drawpen=defaultpen)
+			{ filldraw(pic, (path) g, fillpen, drawpen); }
+		void fill(picture pic = currentpicture, conic g, pen p=defaultpen)
+			{ filldraw(pic, (path) g, p); }
+		pair foot(pair P, pair A, pair B) { return foot(triangle(A,B,P).VC); }
+		pair orthocenter(pair A, pair B, pair C) { return orthocentercenter(A,B,C); }
+		pair centroid(pair A, pair B, pair C) { return (A+B+C)/3; }
+		path CP(pair P, pair A) { return circle(P, abs(A-P)); }
+		path CR(pair P, real r) { return circle(P, r); }
+		pair IP(path p, path q) { return intersectionpoints(p,q)[0]; }
+		pair OP(path p, path q) { return intersectionpoints(p,q)[1]; }
+		path Line(pair A, pair B, real a=0.6, real b=a) { return (a*(A-B)+A)--(b*(B-A)+B); }
+		picture CC() {
+			picture p=rotate(0)*currentpicture;
+			currentpicture.erase();
+			return p;
+		}
+		pair MP(Label s, pair A, pair B = plain.S, pen p = defaultpen) {
+			Label L = s;
+			L.s = "$"+s.s+"$";
+			label(L, A, B, p);
+			return A;
+		}
+		pair Drawing(Label s = "", pair A, pair B = plain.S, pen p = defaultpen) {
+			dot(MP(s, A, B, p), p);
+			return A;
+		}
+		path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
+			draw(g, p, ar);
+			return g;
+		}
+	\end{asydef}
+\fi
+
+%%fakesection BEGIN MAIN SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifazzamsetup
+	%%fakesection Package Loading
+	\ifazzampkg
+		\PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor}
+		\usepackage{xcolor}
+
+		% ── Helvethia palette ────────────────────────────────────────────
+		\definecolor{bg}{HTML}{F2EEE5}
+		\definecolor{surface}{HTML}{FFFDF8}
+		\definecolor{surfacealt}{HTML}{F2EEE5}
+		\definecolor{ink}{HTML}{1A1C24}
+		\definecolor{inksoft}{HTML}{3A3D49}
+		\definecolor{crimson}{HTML}{A8324A}
+		\definecolor{crimsonink}{HTML}{7A1F33}
+		% gradient accent colors (used by gradient / gradient2 options)
+		\definecolor{gradnavy}{HTML}{2E3A55}
+		\definecolor{gradgold}{HTML}{C58F3A}
+		% ─────────────────────────────────────────────────────────────────
+
+		\definecolor{lightblue}{RGB}{173,216,230}
+		\definecolor{lightyellow}{RGB}{255,255,224}
+		\definecolor{lightgreen}{RGB}{144,238,144}
+		\usepackage{graphicx}
+		\graphicspath{{./}}
+		\usepackage[normalem]{ulem}
+		\usepackage{mathtools}
+		\usepackage{multicol}
+		\usepackage{float}
+		\usepackage[most]{tcolorbox}
+		\usepackage{pgfplots}
+		\pgfplotsset{compat=1.15}
+		\usepackage{mathrsfs}
+		\usepackage{tkz-euclide}
+		\usetikzlibrary{arrows}
+		\usepackage[shortlabels]{enumitem}
+		\usepackage{microtype}
+		\usepackage[obeyFinal,textsize=scriptsize,shadow]{todonotes}
+		\usepackage{tasks}
+		\ifazzamhref
+			\usepackage[colorlinks=true]{hyperref}
+		\fi
+		\usepackage[nameinlink]{cleveref}
+
+		% ── Fonts ────────────────────────────────────────────────────────
+		% Palatino-style math (newpxmath) — elegant, calligraphic, pairs
+		% beautifully with a sans-serif body. Must be loaded before helvet
+		% so it doesn't accidentally inherit the sans text font for math.
+		\usepackage{newpxmath}
+		% Helvetica body text (math glyphs are already set by newpxmath above)
+		\usepackage[scaled=0.95]{helvet}
+		\renewcommand{\familydefault}{\sfdefault}
+		% ─────────────────────────────────────────────────────────────────
+	\fi
+
+	%%fakesection Set up author and date
+    \ifazzamauthor
+		\author{\small Azzam Labib Hakim \textbar Instagram: @haxuv\_world \textbar Threads: @azzam\_29\_12}
+	\fi
+	\ifazzamstargen
+		\author{\small Star Generation +62 817 769 318 \textbar Instagram: @stargeneration\_id\\ \small Azzam L. H. (IG: @azzam\_29\_12)}
+	\fi
+
+	%%fakesection Hyperref Customization
+	\ifazzamhref
+		\hypersetup{
+			linkcolor=crimson,
+			filecolor=crimson,
+			urlcolor=crimson,
+			citecolor=inksoft,
+			pdfpagemode=FullScreen
+		}
+	\fi
+
+	%%fakesection New Theorem Styles
+	\ifazzamthm
+		\ifdefined\openbox\let\openbox\relax\fi % newpxmath defines \openbox; clear it before amsthm
+		\usepackage{amsthm}
+		\usepackage{amsmath}
+		\usepackage{thmtools}
+	\fi
+	\ifazzammdthm
+		\usepackage[framemethod=TikZ]{mdframed}
+		% Theorem / Lemma / Proposition / Corollary — crimson border, cream panel
+		\mdfdefinestyle{mdbluebox}{%
+			roundcorner=10pt, linewidth=1pt, skipabove=12pt, innerbottommargin=9pt,
+			skipbelow=2pt, linecolor=crimson, nobreak=true, backgroundcolor=surface}
+		\declaretheoremstyle[headfont=\sffamily\bfseries\color{crimsonink},
+			mdframed={style=mdbluebox}, headpunct={\\[3pt]}, postheadspace={0pt}]{thmbluebox}
+		% Example — surface-alt panel, crimson border
+		\mdfdefinestyle{mdredbox}{%
+			linewidth=0.5pt, skipabove=12pt, frametitleaboveskip=5pt, frametitlebelowskip=0pt,
+			skipbelow=2pt, frametitlefont=\bfseries, innertopmargin=4pt, innerbottommargin=8pt,
+			nobreak=true, backgroundcolor=surfacealt, linecolor=crimson}
+		\declaretheoremstyle[headfont=\bfseries\color{crimson},
+			mdframed={style=mdredbox}, headpunct={\\[3pt]}, postheadspace={0pt}]{thmredbox}
+		% Claim / Algorithm — left bar in ink-soft
+		\mdfdefinestyle{mdgreenbox}{%
+			skipabove=8pt, linewidth=2pt, rightline=false, leftline=true, topline=false,
+			bottomline=false, linecolor=inksoft, backgroundcolor=bg}
+		\declaretheoremstyle[headfont=\bfseries\sffamily\color{ink},
+			bodyfont=\normalfont, spaceabove=2pt, spacebelow=1pt, mdframed={style=mdgreenbox},
+			headpunct={ --- }]{thmgreenbox}
+		% Remark — left bar in ink-soft, surface-alt bg
+		\mdfdefinestyle{mdblackbox}{%
+			skipabove=8pt, linewidth=3pt, rightline=false, leftline=true, topline=false,
+			bottomline=false, linecolor=inksoft, backgroundcolor=surfacealt}
+		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small,
+			spaceabove=0pt, spacebelow=0pt, mdframed={style=mdblackbox}]{thmblackbox}
+		% Solution — left bar in crimson, surface bg
+		\mdfdefinestyle{mdsolbox}{%
+			skipabove=8pt, linewidth=3pt, rightline=false, leftline=true, topline=false,
+			bottomline=false, linecolor=crimson, backgroundcolor=surface}
+		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small,
+			spaceabove=0pt, spacebelow=0pt, mdframed={style=mdsolbox}]{thmsolbox}
+		% Remark-lemma — left bar in crimson-ink, surface-alt bg
+		\mdfdefinestyle{mdremarkbox}{%
+			skipabove=8pt, linewidth=3pt, rightline=false, leftline=true, topline=false,
+			bottomline=false, linecolor=crimsonink, backgroundcolor=surfacealt}
+		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small,
+			spaceabove=0pt, spacebelow=0pt, mdframed={style=mdremarkbox}]{remarksolbox}
+		\declaretheoremstyle[spaceabove=8pt, spacebelow=20pt]{soalstandar}
+		\declaretheoremstyle[spaceabove=8pt, spacebelow=20pt]{soaljawab}
+		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small, spaceabove=3pt,
+			spacebelow=1pt, mdframed={style=mdsolbox}]{jawabanstandar}
+		\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont\small, spaceabove=1pt,
+			spacebelow=12pt, mdframed={style=mdblackbox}]{solusistandar}
+		\newcommand{\listhack}{$\empty$\vspace{-2em}}
+	\fi
+
+	%%fakesection Theorem setup
+	\ifazzamthm
+		\theoremstyle{definition}
+		\ifazzammdthm
+			\ifazzamsecthm
+				\declaretheorem[%
+				style=thmbluebox,name=Theorem,numberwithin=section]{theorem}
+			\else
+				\declaretheorem[%
+				style=thmbluebox,name=Theorem]{theorem}
+			\fi
+			\declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
+			\declaretheorem[style=thmbluebox,name=Proposition,sibling=theorem]{proposition}
+			\declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}
+			\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem*}
+			\declaretheorem[style=thmbluebox,name=Lemma,numbered=no]{lemma*}
+			\declaretheorem[style=thmbluebox,name=Proposition,numbered=no]{proposition*}
+			\declaretheorem[style=thmbluebox,name=Corollary,numbered=no]{corollary*}
+		\else
+			\ifazzamsecthm
+				\declaretheorem[name=Theorem,numberwithin=section]{theorem}
+			\else
+				\declaretheorem[name=Theorem]{theorem}
+			\fi
+			\declaretheorem[name=Lemma,sibling=theorem]{lemma}
+			\declaretheorem[name=Proposition,sibling=theorem]{proposition}
+			\declaretheorem[name=Corollary,sibling=theorem]{corollary}
+			\declaretheorem[name=Theorem,numbered=no]{theorem*}
+			\declaretheorem[name=Lemma,numbered=no]{lemma*}
+			\declaretheorem[name=Proposition,numbered=no]{proposition*}
+			\declaretheorem[name=Corollary,numbered=no]{corollary*}
+		\fi
+
+		\ifazzammdthm
+			\declaretheorem[style=thmgreenbox,name=Algorithm,sibling=theorem]{algorithm}
+			\declaretheorem[style=thmgreenbox,name=Algorithm,numbered=no]{algorithm*}
+			\declaretheorem[style=thmgreenbox,name=Claim,sibling=theorem]{claim}
+			\declaretheorem[style=thmgreenbox,name=Claim,numbered=no]{claim*}
+		\else
+			\declaretheorem[name=Algorithm,sibling=theorem]{algorithm}
+			\declaretheorem[name=Algorithm,numbered=no]{algorithm*}
+			\declaretheorem[name=Claim,sibling=theorem]{claim}
+			\declaretheorem[name=Claim,numbered=no]{claim*}
+		\fi
+
+		\ifazzammdthm
+			\declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
+			\declaretheorem[style=thmredbox,name=Example,numbered=no]{example*}
+		\else
+			\declaretheorem[name=Example,sibling=theorem]{example}
+			\declaretheorem[name=Example,numbered=no]{example*}
+		\fi
+
+		\ifazzammdthm
+			\declaretheorem[style=thmblackbox,name=Remark,sibling=theorem]{remark}
+			\declaretheorem[style=thmblackbox,name=Remark,numbered=no]{remark*}
+			\declaretheorem[style=remarksolbox,name=Lemma,numbered=no]{lemmarev}
+			\declaretheorem[style=jawabanstandar,name=Jawaban,numbered=no]{jawaban}
+		\else
+			\declaretheorem[name=Remark,sibling=theorem]{remark}
+			\declaretheorem[name=Remark,numbered=no]{remark*}
+			\declaretheorem[name=Remark,sibling=theorem]{remarkrev}
+		\fi
+
+		\declaretheorem[name=Conjecture,sibling=theorem]{conjecture}
+		\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
+		\declaretheorem[name=Definition,sibling=theorem]{definition}
+		\declaretheorem[name=Definition,numbered=no]{definition*}
+		\declaretheorem[name=Exercise,sibling=theorem]{exercise}
+		\declaretheorem[name=Exercise,numbered=no]{exercise*}
+		\declaretheorem[name=Fact,sibling=theorem]{fact}
+		\declaretheorem[name=Fact,numbered=no]{fact*}
+		\declaretheorem[name=Problem,sibling=theorem]{problem}
+		\declaretheorem[name=Problem,numbered=no]{problem*}
+		\declaretheorem[name=Question,sibling=theorem]{ques}
+		\declaretheorem[name=Question,numbered=no]{ques*}
+
+		\declaretheorem[name=Soal,sibling=theorem]{soal}
+		\declaretheorem[style=soalstandar,name=Soal,numbered=yes]{soalbaru}
+		\declaretheorem[style=soaljawab,name=Soal,numbered=yes]{soaljawab}
+		\declaretheorem[style=solusistandar,name=Solusi,numbered=no]{solusi}
+
+		\Crefname{claim}{Claim}{Claims}
+		\Crefname{conjecture}{Conjecture}{Conjectures}
+		\Crefname{exercise}{Exercise}{Exercises}
+		\Crefname{fact}{Fact}{Facts}
+		\Crefname{problem}{Problem}{Problems}
+		\Crefname{ques}{Question}{Questions}
+	\fi
+
+	%%fakesection Fancy section and chapter heads — crimson brand color
+	\ifazzamcolorsec
+		\@ifundefined{KOMAClassName}{}{
+			\@ifundefined{chapter}{}{
+				\addtokomafont{partprefix}{\rmfamily}
+				\renewcommand*{\partformat}{\color{crimson}
+					\scalebox{2.5}{\thepart}\enlargethispage{2em}}
+				\addtokomafont{chapterprefix}{\raggedleft}
+				\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
+				\renewcommand*{\chapterformat}{\mbox{%
+					\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
+					\scalebox{2.718}{\color{crimson}\thechapter}\enskip}}
+			}
+			\renewcommand*{\sectionformat}%
+				{\color{crimson}\S\thesection\enskip}
+			\renewcommand*{\subsectionformat}%
+				{\color{crimson}\S\thesubsection\enskip}
+			\renewcommand*{\subsubsectionformat}%
+				{\color{crimson}\S\thesubsubsection\enskip}
+			\KOMAoptions{numbers=noenddot}
+		}
+	\fi
+
+	%%fakesection Your Custom List Environment for Problems
+	\newcounter{problemcounter}
+	\newlist{problems}{enumerate}{1}
+	\setlist[problems]{label=\arabic*., ref=\arabic*, before=\setcounter{problemcounter}{\value{enumi}}}
+
+	%%fakesection \maketitle configuration
+	\@ifundefined{KOMAClassName}%
+		{}
+		{%
+		\addtokomafont{subtitle}{\Large}
+		\setkomafont{author}{\Large\scshape}
+		\setkomafont{date}{\Large\normalsize}
+		}
+	\providecommand{\thetitle}{\@title}
+	\providecommand{\theauthor}{\@author}
+	\providecommand{\thedate}{\@date}
+
+	%%fakesection Page Layout
+    %%space
+	\renewcommand{\baselinestretch}{1.5}
+	\setlength{\parindent}{0pt}
+
+	\ifazzamfancy
+    	\@ifundefined{KOMAClassName}
+		{
+			\usepackage{fancyhdr}
+			\setlength{\headheight}{0.75in}
+			\setlength{\oddsidemargin}{0in}
+			\setlength{\evensidemargin}{0in}
+			\setlength{\voffset}{-1.0in}
+			\setlength{\headsep}{10pt}
+			\setlength{\textwidth}{6.5in}
+			\setlength{\headwidth}{6.5in}
+			\setlength{\textheight}{8.75in}
+			\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+			\setlength{\footskip}{0.3in}
+			\ifazzamhdr
+				\renewcommand{\headrulewidth}{0.5pt}
+				\renewcommand{\footrulewidth}{0.0pt}
+				\pagestyle{fancy}
+				\lhead{\small Azzam Labib Hakim \textbar Instagram: @haxuv\_world \textbar Threads: @azzam\_29\_12}
+				\chead{}
+				\rhead{}
+				\lfoot{}
+				\cfoot{\thepage}
+				\rfoot{}
+			\fi
+		}
+		{
+			\usepackage[headsepline]{scrlayer-scrpage}
+			\renewcommand{\headfont}{}
+			\addtolength{\textheight}{1.33in}
+			\addtolength{\oddsidemargin}{-0.45in}
+			\addtolength{\evensidemargin}{-0.45in}
+			\addtolength{\textwidth}{0.9in}
+			\addtolength{\footskip}{-0.5in}
+			\addtolength{\headsep}{-0.16in}
+			\addtolength{\voffset}{0.15in}
+
+			\automark{section}
+			\chead{}
+			\ihead{\textbf{\thetitle}\\
+					\theauthor}
+			\ohead{\small \thedate\\}
+			\cfoot{\pagemark}
+			\ifoot{}
+			\ofoot{}
+		}
+	\fi
+
+	%%fakesection StarGen Watermark
+	\ifazzamstargen
+		\IfFileExists{stargen.png}{%
+			\usepackage{background}
+			\backgroundsetup{contents=\includegraphics{stargen.png}, angle=0, scale=1.2, opacity=0.10}
+		}{%
+			\PackageWarning{azzam-helvethia}{'stargen.png' not found. Watermark will not be displayed.}
+		}
+	\fi
+
+	%%fakesection Hints
+	\ifazzamhints
+		\usepackage{answers}
+		\Newassociation{hint}{hintitem}{hints}
+		\renewcommand{\solutionextension}{out}
+		\Opensolutionfile{hints}
+		\newcommand{\makehints}{\Closesolutionfile{hints}\input{hints.out}} % chktex 27
+	\fi
+
+	%%fakesection Gradient background (options: gradient / gradient2)
+	% Page dimensions assumed: 17 cm × 21.25 cm (Instagram 4:5).
+	% Ellipse sizes are scaled from a 1080 px reference width.
+	%
+	% Usage in a post file:
+	%   \SetGradient   — enable gradient for this page onward
+	%   \ClearGradient — disable gradient for this page onward
+	%
+	% Or enable for the whole document by passing the option to the package:
+	%   \usepackage[hagavi,gradient]{azzam-helvethia}   % subtle 2-point
+	%   \usepackage[hagavi,gradient2]{azzam-helvethia}  % richer 3-point
+	\newcommand{\SetGradient}{\ifazzamgradient\global\azzamgradientactivetrue\fi}
+	\newcommand{\ClearGradient}{\ifazzamgradient\global\azzamgradientactivefalse\fi}
+	\ifazzamgradient
+		\RequirePackage{eso-pic}
+		\global\azzamgradientactivetrue
+		\ifazzamgradienttwo
+			% ── Option 2: richer three-point gradient ──────────────────────
+			% Centers pushed 2 cm outside page edges so the gradient bleeds
+			% in softly rather than starting at full intensity at the boundary.
+			% Top-left  : crimson  12%, center 2 cm above page top
+			% Bot-right : gradnavy 10%, center 2 cm below page bottom
+			% Center    : gradgold  8%, center at page mid
+			\AddToShipoutPictureBG{%
+				\ifazzamgradientactive
+					\AtPageLowerLeft{%
+						\begin{tikzpicture}[overlay]
+							\begin{scope}
+								\clip (0,0) rectangle (17cm,21.25cm);
+								\begin{scope}[xshift=2.55cm,yshift=23.25cm,xscale=2]
+									\shade[inner color=crimson!12!bg,outer color=bg,shading=radial]
+										(0,0) circle[radius=8cm];
+								\end{scope}
+								\begin{scope}[xshift=15.3cm,yshift=-2cm,xscale=1.2]
+									\shade[inner color=gradnavy!10!bg,outer color=bg,shading=radial]
+										(0,0) circle[radius=10cm];
+								\end{scope}
+								\begin{scope}[xshift=8.5cm,yshift=10.625cm,xscale=1.67]
+									\shade[inner color=gradgold!8!bg,outer color=bg,shading=radial]
+										(0,0) circle[radius=5.5cm];
+								\end{scope}
+							\end{scope}
+						\end{tikzpicture}%
+					}%
+				\fi
+			}%
+		\else
+			% ── Option 1: subtle two-point gradient (default) ──────────────
+			% Centers pushed 2 cm outside page edges for a soft bleed-in.
+			% Top-left  : crimson  7%, center 2 cm above page top
+			% Bot-right : gradnavy 6%, center 2 cm below page bottom
+			\AddToShipoutPictureBG{%
+				\ifazzamgradientactive
+					\AtPageLowerLeft{%
+						\begin{tikzpicture}[overlay]
+							\begin{scope}
+								\clip (0,0) rectangle (17cm,21.25cm);
+								\begin{scope}[xshift=1.7cm,yshift=23.25cm,xscale=2]
+									\shade[inner color=crimson!7!bg,outer color=bg,shading=radial]
+										(0,0) circle[radius=7cm];
+								\end{scope}
+								\begin{scope}[xshift=16.15cm,yshift=-2cm,xscale=1.25]
+									\shade[inner color=gradnavy!6!bg,outer color=bg,shading=radial]
+										(0,0) circle[radius=8cm];
+								\end{scope}
+							\end{scope}
+						\end{tikzpicture}%
+					}%
+				\fi
+			}%
+		\fi
+	\fi
+%%fakesection END MAIN SETUP
+\fi
