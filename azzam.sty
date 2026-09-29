@@ -447,6 +447,19 @@
 	\renewcommand{\baselinestretch}{1.5}
 	\setlength{\parindent}{0pt}
 	
+	% Vertical breathing room between the body text and the header/footer.
+	% geometry defaults (headsep=25pt, footskip=30pt) leave a wide empty band
+	% on both ends; these tighter values let the text sit close to the head
+	% rule and close to the page number. A document that wants a different
+	% gap overrides either one after loading azzam, e.g.
+	%   \usepackage[hagavi]{azzam}
+	%   \geometry{headsep=6pt, footskip=14pt}
+	% \azzamfootskip stays at least one stretched text line tall: KOMA's
+	% scrlayer-scrpage refuses a footskip that cannot hold a full footer line
+	% and silently enlarges it, so 22pt keeps the 12pt/1.5 layout warning free.
+	\providecommand{\azzamheadsep}{10pt}
+	\providecommand{\azzamfootskip}{22pt}
+
 	\ifazzamfancy
 		\usepackage{geometry}
 		% Bind the layout to the *actual* paper dimensions set by the document
@@ -460,7 +473,9 @@
 			paperheight=\paperheight,
 			margin=1cm,
 			includeheadfoot,
-			headheight=20pt
+			headheight=25pt,
+			headsep=\azzamheadsep,
+			footskip=\azzamfootskip
 		}
 		\usepackage{lastpage}
 
@@ -472,7 +487,7 @@
 				% The two-line title/author header needs more vertical room than
 				% the default 20pt; enlarge the head only for standard classes so
 				% the KOMA branch below keeps its own (working) head layout.
-				\geometry{headheight=40pt}
+				\geometry{headheight=25pt}
 				\renewcommand{\headrulewidth}{0.5pt}
 				\renewcommand{\footrulewidth}{0.0pt}
 				\pagestyle{fancy}
@@ -491,6 +506,12 @@
 		}
 		{
 			\usepackage[headsepline]{scrlayer-scrpage}
+			% KOMA measures the two line header (plus its rule) and the footer
+			% line against \headheight/\footheight, then quietly resizes them
+			% and shaves \topmargin when they are too small, which drags the
+			% header toward the paper edge. Reserve the room up front instead.
+			\geometry{headheight=25pt}
+			\setlength{\footheight}{\azzamfootskip}
 			\renewcommand{\headfont}{}
 			\automark{section}
 			% center header
