@@ -1,0 +1,234 @@
+{
+ "title": "Review Quiz 2 - September",
+ "description": "Review Quiz 2 - September",
+ "instruction": "1. No timer. You can work on it until the deadline.\n2. No cheating:\n \na) You are not allowed to discuss the questions and solutions with friends.\nb) You are not allowed to use any AI such as ChatGPT, Gemini, Claude, etc.\n3. Calculator is NOT allowed.\n4. Discussing the questions with parents or other coaches is allowed, as long as the intention is to learn the way of working, not just to ask for the final answer.\n5. Only submit once. If there are many submissions, only the first one will be counted.",
+ "startingPoints": 12,
+ "maxScore": 100,
+ "dueDate": "2026-10-07T11:30:00.000Z",
+ "showScoreToStudents": false,
+ "sectionOrder": [
+  "standalone",
+  "p1"
+ ],
+ "releaseDate": "2026-09-30T13:00:00.000Z",
+ "isHidden": true,
+ "parts": [
+  {
+   "tempId": "p1",
+   "title": "Section A: Short Answer",
+   "description": "",
+   "orderIndex": 1,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0
+  }
+ ],
+ "questions": [
+  {
+   "tempId": "q1",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "Work out $100 - 4 \\times (18 - 3 \\times 5) + 36 \\div (2 \\times 3)$.",
+   "useLatex": true,
+   "orderIndex": 0,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "94"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q2",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "Andi walks at a steady speed of 5 km/h. How far does he walk in 3 hours? Give the answer in km.",
+   "useLatex": false,
+   "orderIndex": 1,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "15 km"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q3",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "Work out $2027^2 - 2023^2$.",
+   "useLatex": true,
+   "orderIndex": 2,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "16200"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q4",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "A triangle has sides 13 cm, 13 cm and 10 cm. Find its area.",
+   "useLatex": false,
+   "orderIndex": 3,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "60 cm^2"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q5",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "Five friends, including Alya and Bintang, stand in a row for a photo. Alya and Bintang refuse to stand next to each other. In how many ways can the five friends stand?",
+   "useLatex": false,
+   "orderIndex": 4,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "72"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q6",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "A fisherman rows at 8 km/h in still water. The river current is 2 km/h. He rows 15 km downstream and then rows back upstream to his starting point. How many hours does the whole trip take?",
+   "useLatex": false,
+   "orderIndex": 5,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "4 hours"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q7",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "Each interior angle of a regular polygon is $156^{\\circ}$. How many diagonals does it have?",
+   "useLatex": true,
+   "orderIndex": 6,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "90"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  },
+  {
+   "tempId": "q8",
+   "tempPartId": "p1",
+   "type": "text",
+   "text": "Six points are marked on one straight line, and four points are marked on another line parallel to it. How many triangles have all three corners among these 10 points?",
+   "useLatex": false,
+   "orderIndex": 7,
+   "pointsCorrect": 11,
+   "pointsIncorrect": 0,
+   "pointsUnanswered": 0,
+   "options": [],
+   "answerKey": [
+    {
+     "answer": "96"
+    }
+   ],
+   "questionImagePath": null,
+   "questionImageMimeType": null,
+   "answerImagePath": null,
+   "answerImageMimeType": null,
+   "hasQuestionImage": false,
+   "hasNewQuestionImage": false,
+   "hasAnswerImage": false,
+   "hasNewAnswerImage": false
+  }
+ ],
+ "passages": [],
+ "deletedQuestionIds": [],
+ "deletedPassageIds": [],
+ "deletedPartIds": [],
+ "groupAccess": [],
+ "tutorAccess": []
+}
